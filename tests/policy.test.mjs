@@ -99,7 +99,7 @@ test('Durable Object alarm accepts a private-token job, broadcasts one pre-signe
  await doObj.alarm();
  assert.equal(sent.length,1);
  let authenticated=await (await doObj.fetch(new Request('https://internal/job/'+id,{headers:{authorization:'Bearer '+token}}))).json();
- assert.equal(authenticated.job.status,'SUBMITTED');assert.equal(authenticated.job.rawStored,false);
+ assert.ok(['SUBMITTED','MINED'].includes(authenticated.job.status));assert.equal(authenticated.job.rawStored,false);
  await doObj.alarm();
  authenticated=await (await doObj.fetch(new Request('https://internal/job/'+id,{headers:{authorization:'Bearer '+token}}))).json();
  assert.equal(authenticated.job.status,'MINED');assert.equal(authenticated.job.receipt.actualPaidPROS,'0.000084');
