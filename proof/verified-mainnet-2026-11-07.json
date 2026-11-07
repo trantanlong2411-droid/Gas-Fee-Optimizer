@@ -1,0 +1,69 @@
+{
+  "schema": "pharos-gas-fee-optimizer-production-proof-v1",
+  "verifiedAtUtc": "2026-11-07T09:02:31Z",
+  "sourceWorkflows": {
+    "unit-build-live-rpc": "https://github.com/trantanlong2411-droid/Gas-Fee-Optimizer/actions/runs/42358054642",
+    "public-production": "https://github.com/trantanlong2411-droid/Gas-Fee-Optimizer/actions/runs/42358054610"
+  },
+  "github": "https://github.com/trantanlong2411-droid/Gas-Fee-Optimizer",
+  "publicWorker": {
+    "verified": true,
+    "liveMarket": true,
+    "persistentGasHistoryInitialized": true,
+    "deadlinePolicySimulation": true,
+    "independentHistoricalReceiptProof": true,
+    "rejectsMalformedSignedTransaction": true,
+    "automaticFundedTransactionBroadcastTest": false
+  },
+  "network": "Pharos Mainnet",
+  "chainId": 1672,
+  "observedGas": {
+    "blockNumber": 22362595,
+    "gasPriceWei": "10000000000",
+    "gasPriceGwei": "10.0",
+    "baseFeeGwei": "10.0",
+    "priorityGwei": "0.0",
+    "observationUtc": "2026-11-07T09:02:25.364Z"
+  },
+  "independentlyMinedReceipt": {
+    "hash": "0x28a76a84b85e494cdf509611421e08ee871e74e9bd8b332e9ebcf146b60bd61b",
+    "blockNumber": 22205123,
+    "gasUsed": "100768",
+    "effectiveGasGwei": "10.0",
+    "actualFeePaidPROS": "0.00100768",
+    "optimizerSubmitted": false,
+    "requestTimeSavingsMeasured": false
+  },
+  "rpcBroadcastMethodProbe": {
+    "called": true,
+    "returnedSuccess": false,
+    "invalidPayload": "0xdeadbeef",
+    "response": "TX_OVER_SIZE: transaction RLP is too large",
+    "methodRecognized": true,
+    "intentionallyInvalidNotMined": true
+  },
+  "unitTests": {
+    "allPassed": true,
+    "cases": [
+      "Valid signed EIP-1559 Pharos chain ID 1672",
+      "Cross-chain and legacy signed transaction rejection",
+      "Target threshold rule",
+      "Deadline overrides high gas quote",
+      "Deadline overrides missing quote",
+      "Expected costs from receipt",
+      "Read-only policy demo",
+      "Durable Object alarm with fake RPC accepts one signed transaction",
+      "Authenticated job status and no raw payload leak",
+      "Receipt integration mock",
+      "RPC outage leaves retry state without invented receipt"
+    ]
+  },
+  "limitations": [
+    "No funded user transaction was signed or broadcast by CI, so end-to-end paid optimization savings are not yet proven.",
+    "Cloudflare Alarm and external RPC cannot guarantee a transaction is broadcast or mined by an exact deadline.",
+    "A user-signed fee cap cannot be raised by the scheduler. During high base fee a deadline attempt can be rejected or remain pending.",
+    "Historical independent receipt is a real chain observation, not proof an optimizer job was sent.",
+    "Cost comparison after a real job uses observed request-time network quote with gasUsed from actual receipt as a hypothetical baseline.",
+    "Never upload private keys or seed phrases. Raw signed transactions are broadcast-authorizing bytes."
+  ]
+}
